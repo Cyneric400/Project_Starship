@@ -1,1 +1,0 @@
-This should print to the command line when catted.
