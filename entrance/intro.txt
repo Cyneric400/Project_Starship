@@ -1,0 +1,22 @@
+Cygnus IV Systems powering on...
+
+'Good morning, Captain'
+
+Checking environment...
+WARNING: Solar Flare
+
+Checking systems...
+Navigation System OFFLINE...
+Reactor Systems OFFLINE...
+Engine Systems OFFLINE...
+Backup Terminal System... ONLINE
+
+Current trajectory: CRASH LANDING TO 'EARTH' IMMINENT
+
+Please reboot systems.
+
+Use these commands to navigate:
+  pwd - Displays your current location
+  ls - Displays nearby files and directories
+  cd - Move to another directory
+  cat - Display contents of a file
