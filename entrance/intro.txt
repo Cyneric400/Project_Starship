@@ -20,5 +20,4 @@ Use these commands to navigate:
   ls - Displays nearby files and directories
   cd - Move to another directory
   cat - Display contents of a file
-
-./syscheck.sh
+  ./syscheck.sh - Runs a check on the ship's systems
