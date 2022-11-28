@@ -1,0 +1,6 @@
+# MAIN REACTOR CONFIG FILE
+
+max-power=100
+power-mode=EMERGENCY-LOW-POWER
+
+allow-power-reallocation=YES
