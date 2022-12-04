@@ -17,6 +17,7 @@ done < "$mainenginefile"
 
 echo "Running systems check..."
 sleep 1
+https://phoenixnap.com/kb/bash-comment
 echo "Navigation System $navStatus ..."
 sleep 0.1
 echo "Reactor Systems $reactorStatus..."
