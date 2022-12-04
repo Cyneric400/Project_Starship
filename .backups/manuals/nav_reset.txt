@@ -1,0 +1,7 @@
+STEPS TO FOLLOW
+1. create pulsar_compass.txt (touch)
+2. rename corrupted file to orbit (mv)
+3. move orbit to flight-paths (mv)
+4. create new flight path based off of default (cp)
+5. remove crashland (rm)
+6. remove corrupted duplicate flight paths directory (rmdir)
