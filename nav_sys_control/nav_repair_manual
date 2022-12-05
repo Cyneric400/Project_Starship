@@ -1,0 +1,18 @@
+If you're here, you're probably in a near death situation. Note: Panicking is NOT advised.
+The 'nav_sys_control' follows the layout listed below in order to work correctly.
+
+nav_sys_control
+    flight_paths
+        orbit
+        default
+        break_orbit
+    pulsar_compass
+
+Use the following commands to make the filesystem match the layout above:
+  touch <file> - create a new file
+  mv <old> <new> - move or rename a file
+  cp <old> <new> - copy a file and give the copy a name
+  rm <file> - remove a file
+  rmdir <directory> - remove a directory
+
+Have fun and don't die!
