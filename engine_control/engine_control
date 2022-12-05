@@ -1,6 +1,68 @@
+navStatus=OFFLINE
+reactorStatus=OFFLINE
+engsysStatus=OFFLINE
+mainengstatus=OFFLINE
+nav0=OFFLINE
+nav1=OFFLINE
+
+mainenginefile="engine_configuration/main_engines"
+nav0file="engine_configuration/nav_thruster_0"
+nav1file="engine_configuration/nav_thruster_1"
+while IFS= read -r line
+do
+  # echo "$line"
+  if [ $line == "status=ONLINE" ];
+  then
+     mainengstatus=ONLINE
+     # echo "hi"
+  fi
+done < "$mainenginefile"
+
+while IFS= read -r line
+do
+	if [ $line == "status=ONLINE" ];
+	then
+		nav0=ONLINE
+	fi
+done < "$nav0file"
+
+while IFS= read -r line
+do
+	if [ $line == "status=ONLINE" ];
+	then
+		nav1=ONLINE
+	fi
+done < "$nav1file"
+
+# Move the following comments to above the loops and if statements
+
+# Add checker to see if reactor config file has been edited
+
+# Add checker to see if navigation directory has been restored to proper format
+
+# Rewrite engine files (mainenginefile, nav0file, nav1file) with status=OFFLINE if all checkers read ONLINE
+
 echo "Launching engine control v.0..."
 echo "Registering thrusters..."
+sleep 0.75
 echo "Bringing main engines online..."
-echo "Engines online."
+sleep 1
+echo "Bringing thrusters online..."
+sleep 1
+echo -e "\n"
+echo "Main engines $mainengstatus"
+sleep 0.1
+echo "Navigational thruster 0 $nav0"
+sleep 0.1
+echo "Navigational thruster 1 $nav1"
+sleep 0.1
+echo -e "\n"
+if [[ $mainengstatus == OFFLINE ]] || [[ $nav0 == OFFLINE ]] || [[ $nav1 == OFFLINE ]];
+then
+    echo "ERROR: Unable to bring engines online."
+    sleep 2
+    exit
+fi
+# echo "Engines online."
 
 read -p "Enter command:" myVar
