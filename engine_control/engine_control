@@ -5,32 +5,36 @@ mainengstatus=OFFLINE
 nav0=OFFLINE
 nav1=OFFLINE
 
+mainengineEnabled=DISABLED
+nav0Enabled=DISABLED
+nav1Enabled=DISABLED
+
 mainenginefile="engine_configuration/main_engines"
 nav0file="engine_configuration/nav_thruster_0"
 nav1file="engine_configuration/nav_thruster_1"
 while IFS= read -r line
 do
   # echo "$line"
-  if [ $line == "status=ONLINE" ];
+  if [ $line == "enabled=TRUE" ];
   then
-     mainengstatus=ONLINE
+     mainengineEnabled=ENABLED
      # echo "hi"
   fi
 done < "$mainenginefile"
 
 while IFS= read -r line
 do
-	if [ $line == "status=ONLINE" ];
+	if [ $line == "enabled=TRUE" ];
 	then
-		nav0=ONLINE
+		nav0Enabled=ENABLED
 	fi
 done < "$nav0file"
 
 while IFS= read -r line
 do
-	if [ $line == "status=ONLINE" ];
+	if [ $line == "enabled=TRUE" ];
 	then
-		nav1=ONLINE
+		nav1Enabled=ENABLED
 	fi
 done < "$nav1file"
 
@@ -45,21 +49,21 @@ done < "$nav1file"
 echo "Launching engine control v.0..."
 echo "Registering thrusters..."
 sleep 0.75
-echo "Bringing main engines online..."
+echo "Registering main engines online..."
 sleep 1
 echo "Bringing thrusters online..."
 sleep 1
 echo -e "\n"
-echo "Main engines $mainengstatus"
+echo "Main engines $mainengineEnabled, $mainengstatus"
 sleep 0.1
-echo "Navigational thruster 0 $nav0"
+echo "Navigational thruster 0 $nav0Enabled, $nav0"
 sleep 0.1
-echo "Navigational thruster 1 $nav1"
+echo "Navigational thruster 1 $nav1Enabled, $nav1"
 sleep 0.1
 echo -e "\n"
-if [[ $mainengstatus == OFFLINE ]] || [[ $nav0 == OFFLINE ]] || [[ $nav1 == OFFLINE ]];
+if [[ $mainengineEnabled == DISABLED ]] || [[ $nav0Enabled == DISABLED ]] || [[ $nav1Enabled == DISABLED ]];
 then
-    echo "ERROR: Unable to bring engines online."
+    echo "ERROR: Unable to bring engines online. Run a systems check and try again. If this message persists, check manuals for more information."
     sleep 2
     exit
 fi
