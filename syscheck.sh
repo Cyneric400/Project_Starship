@@ -8,6 +8,9 @@ nav1=OFFLINE
 mainenginefile="engine_control/engine_configuration/main_engines"
 nav0file="engine_control/engine_configuration/nav_thruster_0"
 nav1file="engine_control/engine_configuration/nav_thruster_1"
+
+# add in more checkers that will set the thruster files to online if all the conditions are met (reactor file has been edited, nav system has been repaired)
+
 while IFS= read -r line
 do
   # echo "$line"
@@ -33,6 +36,8 @@ do
 		nav1=ONLINE
 	fi
 done < "$nav1file"
+
+# Set up a way to have the engine checker pull the systems status from this file.
 
 
 echo "Running systems check..."
