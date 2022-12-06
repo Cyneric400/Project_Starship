@@ -39,6 +39,7 @@ done < "$nav1file"
 
 # Set up a way to have the engine checker pull the systems status from this file.
 
+export $mainengstatus
 
 echo "Running systems check..."
 sleep 1

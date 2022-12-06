@@ -1,0 +1,50 @@
+navStatus=OFFLINE
+reactorStatus=OFFLINE
+engsysStatus=OFFLINE
+mainengstatus0=OFFLINE
+nav0=OFFLINE
+nav1=OFFLINE
+
+mainenginefile="engine_configuration/main_engines"
+nav0file="engine_configuration/nav_thruster_0"
+nav1file="engine_configuration/nav_thruster_1"
+# Move the following comments to above the loops and if statements
+
+# Add checker to see if reactor config file has been edited
+
+# Add checker to see if navigation directory has been restored to proper format
+
+# Rewrite engine files (mainenginefile, nav0file, nav1file) with status=OFFLINE if all checkers read ONLINE
+
+# statusVar=$(source ./syscheck.sh $mainengstatus)
+
+# echo "status is $statusVar"
+
+source ./syscheck.sh
+
+echo "status is $mainengstatus"
+
+echo "Launching engine control v.0..."
+echo "Registering thrusters..."
+sleep 0.75
+echo "Bringing main engines online..."
+sleep 1
+echo "Bringing thrusters online..."
+sleep 1
+echo -e "\n"
+echo "Main engines $mainengstatus0"
+sleep 0.1
+echo "Navigational thruster 0 $nav0"
+sleep 0.1
+echo "Navigational thruster 1 $nav1"
+sleep 0.1
+echo -e "\n"
+if [[ $mainengstatus == OFFLINE ]] || [[ $nav0 == OFFLINE ]] || [[ $nav1 == OFFLINE ]];
+then
+    echo "ERROR: Unable to bring engines online."
+    sleep 2
+    exit
+fi
+# echo "Engines online."
+
+read -p "Enter command:" myVar
