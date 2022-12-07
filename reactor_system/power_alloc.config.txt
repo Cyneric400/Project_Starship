@@ -6,8 +6,8 @@
 navigation=10
 reactor-controls=10
 life-support=40
-computer-core=30
-engine-controllers=5
+computer-core=20
+engine-controllers=15
 # DUE TO EMERGENCY POWER MODE, ENGINE CONTROLS ARE ON INSUFFICIENT POWER
 
 emergency-beacon=5
