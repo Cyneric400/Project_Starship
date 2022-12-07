@@ -11,14 +11,21 @@ nav1file="engine_control/engine_configuration/nav_thruster_1"
 reactorfile="reactor_system/power_alloc.config.txt"
 
 enginePowerStatus=0
-navigationStatus=0
-engineOnline=0
+# Set the variable below to 0 initially and have a checker set up to make sure it's been completed
+navigationStatus=1
 
-meStatus=0
-nav0Status=0
-nav1Status=0
+meStatus=OFFLINE
+nav0Status=OFFLINE
+nav1Status=OFFLINE
 
 # add in more checkers that will set the thruster files to enabled if all the conditions are met (reactor file has been edited, nav system has been repaired)
+
+if [ "$navigationStatus" == 1 ];
+then
+	navStatus=ONLINE
+	nav0Status=ONLINE
+	nav1Status=ONLINE
+fi
 
 while IFS= read -r line
 do

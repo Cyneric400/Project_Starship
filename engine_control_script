@@ -1,10 +1,3 @@
-navStatus=OFFLINE
-reactorStatus=OFFLINE
-engsysStatus=OFFLINE
-mainengstatus0=OFFLINE
-nav0=OFFLINE
-nav1=OFFLINE
-
 mainenginefile="engine_configuration/main_engines"
 nav0file="engine_configuration/nav_thruster_0"
 nav1file="engine_configuration/nav_thruster_1"
@@ -22,21 +15,22 @@ nav1file="engine_configuration/nav_thruster_1"
 
 source ./syscheck.sh
 
-echo "status is $mainengstatus"
-
+echo -e "\n"
+echo "---------"
+echo -e "\n"
 echo "Launching engine control v.0..."
 echo "Registering thrusters..."
 sleep 0.75
-echo "Bringing main engines online..."
+echo "Registering main engines..."
 sleep 1
-echo "Bringing thrusters online..."
+echo "Registering thrusters..."
 sleep 1
 echo -e "\n"
-echo "Main engines $mainengstatus0"
+echo "Main engines $meStatus"
 sleep 0.1
-echo "Navigational thruster 0 $nav0"
+echo "Navigational thruster 0 $nav0Status"
 sleep 0.1
-echo "Navigational thruster 1 $nav1"
+echo "Navigational thruster 1 $nav1Status"
 sleep 0.1
 echo -e "\n"
 if [[ $mainengstatus == OFFLINE ]] || [[ $nav0 == OFFLINE ]] || [[ $nav1 == OFFLINE ]];
