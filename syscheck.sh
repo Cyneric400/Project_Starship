@@ -64,34 +64,33 @@ do
 	fi
 done < "$reactorfile"
 
-export $mainengstatus
-
 echo "Running systems check..."
 sleep 1
 echo "Navigation System $navStatus ..."
 sleep 0.1
 # echo "Reactor Systems $reactorStatus..."
-
-if [ $enginePowerStatus == 1 ];
-then
-	echo "Engine controllers online"
-else
-	echo "WARNING: Insufficient power. Unable to bring engine controllers online."
-fi
-
 sleep 0.1
 # echo "Engine Systems $engsysStatus..."
 # sleep 0.1
 echo -e "\n"
 echo "Main Engines $mainengstatus..."
 sleep 0.1
-echo "Navigation thruster 0 $nav0..."
+echo "Navigation thruster 0 $nav0Status..."
 sleep 0.1
-echo "Navigation thruster 1 $nav1..."
+echo "Navigation thruster 1 $nav1Status..."
 sleep 0.1
 echo -e "\n"
 sleep 0.25
 echo "Backup Terminal System ONLINE..."
+
+
+if [ $enginePowerStatus == 1 ];
+then
+	echo "Engine controllers online"
+else
+	echo "WARNING: Insufficient power to bring engine controllers online. Check power allocations."
+fi
+
 
 sleep 1
 echo -e "\n"
@@ -99,5 +98,3 @@ echo "Course: NO COURSE SET"
 sleep 0.5
 echo -e "\n"
 echo "WARNING: ORBIT DETERIORATING. COLLISION WITH PLANET IMMINENT."
-
-

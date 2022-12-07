@@ -33,12 +33,29 @@ sleep 0.1
 echo "Navigational thruster 1 $nav1Status"
 sleep 0.1
 echo -e "\n"
-if [[ $mainengstatus == OFFLINE ]] || [[ $nav0 == OFFLINE ]] || [[ $nav1 == OFFLINE ]];
+
+if [ $enginePowerStatus == 1 ];
+then
+    echo "Bringing engines online."
+else
+    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
+fi
+
+if [[ "$enginePowerStatus" == 1 ]] && [[ "$navigationStatus" == 1 ]];
+then
+    meStatus=ONLINE
+fi
+
+
+if [[ $meStatus == OFFLINE ]] || [[ $nav0Status == OFFLINE ]] || [[ $nav1Status == OFFLINE ]];
 then
     echo "ERROR: Unable to bring engines online."
     sleep 2
     exit
+else
+    echo "ENGINES ONLINE"
+    echo -e "\n"
 fi
 # echo "Engines online."
 
-read -p "Enter command:" myVar
+read -p "Enter command:" commandIn
