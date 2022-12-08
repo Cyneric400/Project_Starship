@@ -18,13 +18,39 @@ source ./syscheck.sh
 echo -e "\n"
 echo "---------"
 echo -e "\n"
-echo "Launching engine control v.0..."
-echo "Registering thrusters..."
+echo "Launching engine control..."
 sleep 0.75
 echo "Registering main engines..."
 sleep 1
 echo "Registering thrusters..."
 sleep 1
+echo -e "\n"
+
+if [ $enginePowerStatus == 1 ];
+then
+    echo "Power: sufficient power"
+    echo "Bringing main engines online."
+else
+    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
+    exit
+fi
+
+if [ "$navigationStatus" == 1 ];
+then
+    echo "Calibrating nav systems..."
+    sleep 0.1
+    echo "Nav systems online."
+    echo "Bringing nav thrusters online."
+else
+    echo "ERROR: nav system error"
+    echo "Unable to bringing navigation thruster controllers online."
+    exit
+fi
+if [[ "$enginePowerStatus" == 1 ]] && [[ "$navigationStatus" == 1 ]];
+then
+    meStatus=ONLINE
+fi
+
 echo -e "\n"
 echo "Main engines $meStatus"
 sleep 0.1
@@ -34,18 +60,6 @@ echo "Navigational thruster 1 $nav1Status"
 sleep 0.1
 echo -e "\n"
 
-if [ $enginePowerStatus == 1 ];
-then
-    echo "Bringing engines online."
-else
-    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
-fi
-
-if [[ "$enginePowerStatus" == 1 ]] && [[ "$navigationStatus" == 1 ]];
-then
-    meStatus=ONLINE
-fi
-
 
 if [[ $meStatus == OFFLINE ]] || [[ $nav0Status == OFFLINE ]] || [[ $nav1Status == OFFLINE ]];
 then
@@ -53,9 +67,10 @@ then
     sleep 2
     exit
 else
-    echo "ENGINES ONLINE"
+    echo "ALL ENGINES ONLINE"
     echo -e "\n"
 fi
 # echo "Engines online."
 
-read -p "Enter command:" commandIn
+
+read -p "Enter command: " commandIn
