@@ -1,5 +1,5 @@
 navStatus=OFFLINE
-reactorStatus=OFFLINE
+reactorStatus=ONLINE
 engsysStatus=OFFLINE
 mainengstatus=OFFLINE
 nav0=OFFLINE
@@ -111,7 +111,7 @@ then
     echo "Bringing nav thrusters online."
 else
     echo "ERROR: nav system error"
-    echo "Unable to bringing navigation thruster controllers online."
+    echo "Unable to bring navigation thruster controllers online."
     exit
 fi
 if [[ "$enginePowerStatus" == 1 ]] && [[ "$navigationStatus" == 1 ]];
@@ -140,5 +140,43 @@ else
 fi
 # echo "Engines online."
 
+success(){
+	touch success.txt
+	sleep 3
+	echo "You did it! Check the success.txt file for your reward."
+}
 
+checkCommand(){
+	input=$1
+	echo "$input"
+	if [ "$input" == "engines.engage" ];
+	then
+		echo "Calibrating reactor feed..."
+		sleep 0.1
+		echo "Calibrating navigation..."
+		sleep 0.5
+		echo "Setting course to break_orbit..."
+		sleep 1
+		echo "Engaging engines..."
+		sleep 0.25
+		echo "ENGINES FIRING"
+		sleep 3
+		echo "Nav: break_orbit complete"
+		sleep 2
+		echo "Shutting down engines..."
+		sleep 1.25
+		echo "Engines shut down."
+		sleep 1.5
+		echo -e "\n"
+		echo "Out of orbit."
+		echo -e "\n"
+		success
+		return $((1))
+	fi
+}
+
+while :
+do
 read -p "Enter command: " commandIn
+checkCommand $commandIn
+done
