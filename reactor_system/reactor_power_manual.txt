@@ -1,1 +1,1 @@
-Go to power_alloc.config.txt and set engine-controllers to 25. Make sure you draw that 10% of power from some other system, but be careful which one you choose! And make sure it's 25 exactly. 
+Go to power_alloc.config.txt and set engine-controllers to 25. Make sure you draw that 20% of power from some other system, but be careful which one you choose! And make sure it's 25 exactly. 
