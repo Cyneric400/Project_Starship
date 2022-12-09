@@ -3,11 +3,11 @@
 # NOTE - ALL POWER TOTALS MUST ADD UP TO 100 OR CHANGES WILL NOT TAKE AFFECT TO PREVENT REACTOR DAMAGE
 # ADD A # BEFORE A LINE TO COMMENT IT OUT (MAKE THE COMPUTER IGNORE IT)
 
-navigation=10
-reactor-controls=10
+navigation=20
+reactor-controls=20
 life-support=30
-computer-core=20
-engine-controllers=25
+computer-core=25
+engine-controllers=5
 # DUE TO EMERGENCY POWER MODE, ENGINE CONTROLS ARE ON INSUFFICIENT POWER
 
 emergency-beacon=5
