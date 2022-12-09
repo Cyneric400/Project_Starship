@@ -140,5 +140,36 @@ else
 fi
 # echo "Engines online."
 
+success () {
+	touch success.txt
+}
 
+checkCommand () {
+input=$1
+if [ $input == "engines.engage" ];
+then
+	echo "Calibrating reactor feed..."
+	sleep 0.1
+	echo "Calibrating navigation..."
+	sleep 0.5
+	echo "Setting course to break_orbit..."
+	sleep 1
+	echo "Engaging engines..."
+	sleep 0.25
+	echo "ENGINES FIRING"
+	sleep 2
+	echo "Nav: break_orbit complete"
+	sleep 0.5
+	echo "Shutting down engines..."
+	sleep 0.2
+	echo "Engines shut down."
+	sleep 0.5
+	echo "Out of orbit."
+	success()
+}
+
+while :
+do
 read -p "Enter command: " commandIn
+checkCommand() commandIn
+done
