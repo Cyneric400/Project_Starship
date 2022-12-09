@@ -15,11 +15,12 @@ Current trajectory: CRASH LANDING TO 'EARTH' IMMINENT
 
 Please reboot systems.
 
-Use these commands to navigate:
+Use these commands to navigate and interact with the ship's computer:
   pwd - Display your current location
   ls - Display nearby files and directories
   cd <directory> - Move to another directory
     cd .. - Move "backwards"
   cat <file> - Display contents of a file
-  ./syscheck.sh - Run a check on the ship's systems
   man <command> - Display manual for a command
+  ./syscheck.sh - Run a check on the ship's systems
+  ./engine_control - Run the engine control system -- REQUIRES NAVIGATION SYSTEM & REACTOR SYSTEMS TO BE ONLINE
