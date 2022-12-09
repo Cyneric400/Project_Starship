@@ -1,3 +1,5 @@
+# Main variable init--these may not be needed
+
 navStatus=OFFLINE
 reactorStatus=ONLINE
 engsysStatus=OFFLINE
@@ -5,21 +7,32 @@ mainengstatus=OFFLINE
 nav0=OFFLINE
 nav1=OFFLINE
 
+# Initializing file variables
 mainenginefile="engine_control/engine_configuration/main_engines"
 nav0file="engine_control/engine_configuration/nav_thruster_0"
 nav1file="engine_control/engine_configuration/nav_thruster_1"
 reactorfile="reactor_system/power_alloc.config.txt"
+compassfile="nav_sys_control/pulsar_compass"
 
+# These variables are set to 1 if the required challenges have been completed
 enginePowerStatus=0
-# Set the variable below to 0 initially and have a checker set up to make sure it's been completed
-navigationStatus=1
-
+navigationStatus=0
+# These variables are set to ONLINE if the required challenges have been completed
 meStatus=OFFLINE
 nav0Status=OFFLINE
 nav1Status=OFFLINE
 
-# add in more checkers that will set the thruster files to enabled if all the conditions are met (reactor file has been edited, nav system has been repaired)
+# Add nav checkers here
+# Checks to see if there's the required line in pulsar_compass
+while IFS= read -r line
+do
+	if [ "$line" == "compass.activated" ];
+	then
+		navigationStatus=1
+	fi
+done < "$compassfile"
 
+# Activates navigation & nav thrusters if navigation challenges have been completed
 if [ "$navigationStatus" == 1 ];
 then
 	navStatus=ONLINE
