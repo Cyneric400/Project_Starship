@@ -3,9 +3,9 @@ The 'nav_sys_control' follows the layout listed below in order to work correctly
 
 nav_sys_control
     flight_paths
-        orbit
-        default
         break_orbit
+        default
+        orbit
     pulsar_compass
 
 Use the following commands to make the filesystem match the layout above:
@@ -14,5 +14,10 @@ Use the following commands to make the filesystem match the layout above:
   cp <old> <new> - copy a file and give the copy a name
   rm <file> - remove a file
   rmdir <directory> - remove a directory
+
+Tips:
+  break_orbit must be a copy of default. The content in the two files must be the same for the nav system to properly load.
+  pulsar_compass must contain the line "compass.init".
+  Any other files are likely to be corrupted and unusable. Delete if necessary.
 
 Have fun and don't die!
