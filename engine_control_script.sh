@@ -33,7 +33,7 @@ do
 	if [ "$line" == "engine-controllers=25" ];
 	then
 		enginePowerStatus=1
-                echo "$enginePowerStatus"
+                # echo "$enginePowerStatus"
 	fi
 done < "$reactorfile"
 
@@ -63,12 +63,6 @@ sleep 0.5
 echo -e "\n"
 echo "WARNING: ORBIT DETERIORATING. COLLISION WITH PLANET IMMINENT."
 
-
-
-
-mainenginefile="engine_configuration/main_engines"
-nav0file="engine_configuration/nav_thruster_0"
-nav1file="engine_configuration/nav_thruster_1"
 # Move the following comments to above the loops and if statements
 
 # Add checker to see if reactor config file has been edited
@@ -142,13 +136,16 @@ fi
 
 success(){
 	touch success.txt
+	echo "Congratulations, Captain! You saved your ship from destruction. And what's more important, you (hopefully) improved your skills with the Linux command line." >> success.txt
+	echo "If you're interested in improving your skills further (and preventing further disasters), check out the websites below." >> success.txt
+	echo "Who knows--Cygnus IV may need you again someday." >> success.txt
 	sleep 3
 	echo "You did it! Check the success.txt file for your reward."
 }
 
 checkCommand(){
 	input=$1
-	echo "$input"
+	# echo "$input"
 	if [ "$input" == "engines.engage" ];
 	then
 		echo "Calibrating reactor feed..."
@@ -171,7 +168,8 @@ checkCommand(){
 		echo "Out of orbit."
 		echo -e "\n"
 		success
-		return $((1))
+	else  
+		echo "Command not recognized."
 	fi
 }
 
