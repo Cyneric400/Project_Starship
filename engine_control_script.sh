@@ -27,33 +27,6 @@ then
 	nav1Status=ONLINE
 fi
 
-while IFS= read -r line
-do
-  # echo "$line"
-  if [ $line == "status=ONLINE" ];
-  then
-     mainengstatus=ONLINE
-     # echo "hi"
-  fi
-done < "$mainenginefile"
-
-while IFS= read -r line
-do
-	if [ $line == "status=ONLINE" ];
-	then
-		nav0=ONLINE
-	fi
-done < "$nav0file"
-
-while IFS= read -r line
-do
-	if [ $line == "status=ONLINE" ];
-	then
-		nav1=ONLINE
-	fi
-done < "$nav1file"
-
-# Set up a way to have the engine checker pull the systems status from this file.
 
 while IFS= read -r line
 do
@@ -82,15 +55,6 @@ sleep 0.1
 echo -e "\n"
 sleep 0.25
 echo "Backup Terminal System ONLINE..."
-
-
-if [ $enginePowerStatus == 1 ];
-then
-	echo "Engine controllers online"
-else
-	echo "WARNING: Insufficient power to bring engine controllers online. Check power allocations."
-fi
-
 
 sleep 1
 echo -e "\n"
