@@ -84,6 +84,7 @@ then
 	orbit_file_status=1
 fi
 
+# echo "$compass_line_status, $copied_file_status, $useless_file_0_status, $orbit_file_status"
 # Checks to see if each challenge has been completed
 if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]] && [[ "$orbit_file_status" == 1 ]];
 then
