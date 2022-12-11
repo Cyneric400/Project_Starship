@@ -31,14 +31,21 @@ compass_line_status=0
 copied_file_status=1
 useless_file_0_status=0
 orbit_file_status=0
-while IFS= read -r line
-do
-	if [ "$line" == "compass.activated" ];
-	then
-		compass_line_status=1
-	fi
-done < "$compassfile"
-
+if [ -f $compassfile ];
+then
+	while IFS= read -r line
+	do
+		if [ "$line" == "compass.activated" ];
+		then
+			compass_line_status=1
+		fi
+	done < "$compassfile"
+else
+	copmass_line_status=0
+	echo -e "\n"
+	echo "WARNING: Unable to access pulsar_compass file."
+	sleep 0.5
+fi
 # Checks to see if break_orbit and default have the same text
 while IFS= read -r line
 do
