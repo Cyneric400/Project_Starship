@@ -31,14 +31,21 @@ compass_line_status=0
 copied_file_status=1
 useless_file_0_status=0
 orbit_file_status=0
-while IFS= read -r line
-do
-	if [ "$line" == "compass.activated" ];
-	then
-		compass_line_status=1
-	fi
-done < "$compassfile"
-
+if [ -f $compassfile ];
+then
+	while IFS= read -r line
+	do
+		if [ "$line" == "compass.activated" ];
+		then
+			compass_line_status=1
+		fi
+	done < "$compassfile"
+else
+	copmass_line_status=0
+	echo -e "\n"
+	echo "WARNING: Unable to access pulsar_compass file."
+	sleep 0.5
+fi
 # Checks to see if break_orbit and default have the same text
 while IFS= read -r line
 do
@@ -53,6 +60,7 @@ do
 				#echo "Remove this statement"
 			else
 				copied_file_status=0
+				echo "WARNING: error with break_orbit: could not set path to break_orbit. File may be corrupt or missing."
 			fi
 		done < "$break_orbit_file"
 	else
@@ -64,7 +72,7 @@ if [ -d $useless_directory_0 ];
 then
 	useless_file_0_status=0
 	echo -e "\n"
-	echo "ERROR: unrecognized navigation file"
+	echo "WARNING: unrecognized navigation file"
 	sleep 0.75
 	echo -e "\n"
 else
@@ -76,6 +84,7 @@ then
 	orbit_file_status=1
 fi
 
+# echo "$compass_line_status, $copied_file_status, $useless_file_0_status, $orbit_file_status"
 # Checks to see if each challenge has been completed
 if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]] && [[ "$orbit_file_status" == 1 ]];
 then
@@ -149,7 +158,7 @@ then
     echo "Power: sufficient power"
     echo "Bringing main engines online."
 else
-    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
+    echo "WARNING: Insufficient power. Unable to bring engine controllers online. Adjust reactor power allocations."
     exit
 fi
 
