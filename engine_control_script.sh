@@ -60,6 +60,7 @@ do
 				#echo "Remove this statement"
 			else
 				copied_file_status=0
+				echo "WARNING: error with break_orbit: could not set path to break_orbit. File may be corrupt or missing."
 			fi
 		done < "$break_orbit_file"
 	else
