@@ -14,6 +14,8 @@ reactorfile="reactor_system/power_alloc.config.txt"
 compassfile="nav_sys_control/pulsar_compass"
 defaultfile="nav_sys_control/flight_paths/default"
 break_orbit_file="nav_sys_control/flight_paths/break_orbit"
+useless_directory_0="nav_sys_control/3ATTD"
+
 
 # These variables are set to 1 if the required challenges have been completed
 enginePowerStatus=0
@@ -27,6 +29,7 @@ nav1Status=OFFLINE
 # Checks to see if there's the required line in pulsar_compass
 compass_line_status=0
 copied_file_status=1
+useless_file_0_status=0
 while IFS= read -r line
 do
 	if [ "$line" == "compass.activated" ];
@@ -56,8 +59,19 @@ do
 	fi
 done < "$defaultfile"
 
+if [ -d $useless_directory_0 ];
+then
+	useless_file_0_status=0
+	echo -e "\n"
+	echo "ERROR: unrecognized navigation file"
+	sleep 0.75
+	echo -e "\n"
+else
+	useless_file_0_status=1
+fi
+
 # Checks to see if each challenge has been completed
-if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]];
+if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]];
 then
 	navigationStatus=1
 fi
