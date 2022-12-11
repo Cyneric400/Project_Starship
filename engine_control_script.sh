@@ -156,7 +156,7 @@ then
     echo "Power: sufficient power"
     echo "Bringing main engines online."
 else
-    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
+    echo "WARNING: Insufficient power. Unable to bring engine controllers online. Adjust reactor power allocations."
     exit
 fi
 
