@@ -67,7 +67,7 @@ then
 	sleep 0.75
 	echo -e "\n"
 else
-	useless_file_1_status=1
+	useless_file_0_status=1
 fi
 
 # Checks to see if each challenge has been completed
