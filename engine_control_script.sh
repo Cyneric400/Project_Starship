@@ -1,5 +1,4 @@
 # Main variable init--these may not be needed
-
 navStatus=OFFLINE
 reactorStatus=ONLINE
 engsysStatus=OFFLINE
@@ -32,26 +31,33 @@ while IFS= read -r line
 do
 	if [ "$line" == "compass.activated" ];
 	then
-		navigationStatus=1
+		compass_line_status=1
 	fi
 done < "$compassfile"
 
 # Checks to see if break_orbit and default have the same text
 while IFS= read -r line
 do
-	while IFS = read -r line2
-	do
-		if [ "$line2" == "$line" ];
-		then
-			echo "Remove this statement"
-		else
-			copied_file_status=0
-		fi
-	done < "$break_orbit_file"
-done < "$compassfile"
+	# echo $line
+	if [ -f $break_orbit_file ];
+	then	
+		while IFS= read -r line2
+		do
+			if [ "$line2" == "$line" ];
+			then
+				useless_variable=0
+				#echo "Remove this statement"
+			else
+				copied_file_status=0
+			fi
+		done < "$break_orbit_file"
+	else
+		copied_file_status=0
+	fi
+done < "$defaultfile"
 
 # Checks to see if each challenge has been completed
-if [[ "$compass_line_status" == 1 ]] && [[ "$compass_line_status" == 1 ]];
+if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]];
 then
 	navigationStatus=1
 fi
