@@ -17,7 +17,8 @@ Use the following commands to make the filesystem match the layout above:
 
 Tips:
   break_orbit must be a copy of default. The content in the two files must be the same for the nav system to properly load.
-  pulsar_compass must contain the line "compass.init".
+  pulsar_compass must contain the line "compass.activated."
   Any other files are likely to be corrupted and unusable. Delete if necessary.
+
 
 Have fun and don't die!
