@@ -1,3 +1,4 @@
+# Main variable init--these may not be needed
 navStatus=OFFLINE
 reactorStatus=ONLINE
 engsysStatus=OFFLINE
@@ -5,21 +6,92 @@ mainengstatus=OFFLINE
 nav0=OFFLINE
 nav1=OFFLINE
 
+# Initializing file variables
 mainenginefile="engine_control/engine_configuration/main_engines"
 nav0file="engine_control/engine_configuration/nav_thruster_0"
 nav1file="engine_control/engine_configuration/nav_thruster_1"
 reactorfile="reactor_system/power_alloc.config.txt"
+compassfile="nav_sys_control/pulsar_compass"
+defaultfile="nav_sys_control/flight_paths/default"
+break_orbit_file="nav_sys_control/flight_paths/break_orbit"
+useless_directory_0="nav_sys_control/3ATTD"
+orbit_file="nav_sys_control/flight_paths/orbit"
 
+# These variables are set to 1 if the required challenges have been completed
 enginePowerStatus=0
-# Set the variable below to 0 initially and have a checker set up to make sure it's been completed
-navigationStatus=1
-
+navigationStatus=0
+# These variables are set to ONLINE if the required challenges have been completed
 meStatus=OFFLINE
 nav0Status=OFFLINE
 nav1Status=OFFLINE
 
-# add in more checkers that will set the thruster files to enabled if all the conditions are met (reactor file has been edited, nav system has been repaired)
+# Add nav checkers here
+# Checks to see if there's the required line in pulsar_compass
+compass_line_status=0
+copied_file_status=1
+useless_file_0_status=0
+orbit_file_status=0
+if [ -f $compassfile ];
+then
+	while IFS= read -r line
+	do
+		if [ "$line" == "compass.activated" ];
+		then
+			compass_line_status=1
+		fi
+	done < "$compassfile"
+else
+	copmass_line_status=0
+	echo -e "\n"
+	echo "WARNING: Unable to access pulsar_compass file."
+	sleep 0.5
+fi
+# Checks to see if break_orbit and default have the same text
+while IFS= read -r line
+do
+	# echo $line
+	if [ -f $break_orbit_file ];
+	then	
+		while IFS= read -r line2
+		do
+			if [ "$line2" == "$line" ];
+			then
+				useless_variable=0
+				#echo "Remove this statement"
+			else
+				copied_file_status=0
+				echo "WARNING: error with break_orbit: could not set path to break_orbit. File may be corrupt or missing."
+			fi
+		done < "$break_orbit_file"
+	else
+		copied_file_status=0
+	fi
+done < "$defaultfile"
 
+if [ -d $useless_directory_0 ];
+then
+	useless_file_0_status=0
+	echo -e "\n"
+	echo "WARNING: unrecognized navigation file"
+	sleep 0.75
+	echo -e "\n"
+else
+	useless_file_0_status=1
+fi
+
+if [ -f $orbit_file ];
+then
+	orbit_file_status=1
+fi
+
+# echo "$compass_line_status, $copied_file_status, $useless_file_0_status, $orbit_file_status"
+# Checks to see if each challenge has been completed
+if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]] && [[ "$orbit_file_status" == 1 ]];
+then
+	navigationStatus=1
+fi
+
+# Activates navigation & nav thrusters if navigation challenges have been completed
 if [ "$navigationStatus" == 1 ];
 then
 	navStatus=ONLINE
@@ -45,13 +117,6 @@ sleep 0.1
 sleep 0.1
 # echo "Engine Systems $engsysStatus..."
 # sleep 0.1
-echo -e "\n"
-echo "Main Engines $mainengstatus..."
-sleep 0.1
-echo "Navigation thruster 0 $nav0Status..."
-sleep 0.1
-echo "Navigation thruster 1 $nav1Status..."
-sleep 0.1
 echo -e "\n"
 sleep 0.25
 echo "Backup Terminal System ONLINE..."
@@ -93,7 +158,7 @@ then
     echo "Power: sufficient power"
     echo "Bringing main engines online."
 else
-    echo "WARNING: Insufficient power. Unable to bring engine controllers online."
+    echo "WARNING: Insufficient power. Unable to bring engine controllers online. Adjust reactor power allocations."
     exit
 fi
 

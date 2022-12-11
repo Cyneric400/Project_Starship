@@ -14,6 +14,8 @@ Use the following commands to make the filesystem match the layout above:
   cp <old> <new> - copy a file and give the copy a name
   rm <file> - remove a file
   rmdir <directory> - remove a directory
+  <command> >> <file> - appends the output of a command to a specified file
+  nano <file> - opens the specified file in the "nano" text editor
 
 Tips:
   break_orbit must be a copy of default. The content in the two files must be the same for the nav system to properly load.
