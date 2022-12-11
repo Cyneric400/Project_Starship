@@ -71,7 +71,7 @@ if [ -d $useless_directory_0 ];
 then
 	useless_file_0_status=0
 	echo -e "\n"
-	echo "ERROR: unrecognized navigation file"
+	echo "WARNING: unrecognized navigation file"
 	sleep 0.75
 	echo -e "\n"
 else
