@@ -15,7 +15,7 @@ compassfile="nav_sys_control/pulsar_compass"
 defaultfile="nav_sys_control/flight_paths/default"
 break_orbit_file="nav_sys_control/flight_paths/break_orbit"
 useless_directory_0="nav_sys_control/3ATTD"
-
+orbit_file="nav_sys_control/flight_paths/orbit"
 
 # These variables are set to 1 if the required challenges have been completed
 enginePowerStatus=0
@@ -30,6 +30,7 @@ nav1Status=OFFLINE
 compass_line_status=0
 copied_file_status=1
 useless_file_0_status=0
+orbit_file_status=0
 while IFS= read -r line
 do
 	if [ "$line" == "compass.activated" ];
@@ -70,8 +71,13 @@ else
 	useless_file_0_status=1
 fi
 
+if [ -f $orbit_file ];
+then
+	orbit_file_status=1
+fi
+
 # Checks to see if each challenge has been completed
-if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]];
+if [[ "$compass_line_status" == 1 ]] && [[ "$copied_file_status" == 1 ]] && [[ "$useless_file_0_status" == 1 ]] && [[ "$orbit_file_status" == 1 ]];
 then
 	navigationStatus=1
 fi
