@@ -13,6 +13,8 @@ nav0file="engine_control/engine_configuration/nav_thruster_0"
 nav1file="engine_control/engine_configuration/nav_thruster_1"
 reactorfile="reactor_system/power_alloc.config.txt"
 compassfile="nav_sys_control/pulsar_compass"
+defaultfile="nav_sys_control/flight_paths/default"
+break_orbit_file="nav_sys_control/flight_paths/break_orbit"
 
 # These variables are set to 1 if the required challenges have been completed
 enginePowerStatus=0
@@ -24,6 +26,8 @@ nav1Status=OFFLINE
 
 # Add nav checkers here
 # Checks to see if there's the required line in pulsar_compass
+compass_line_status=0
+copied_file_status=1
 while IFS= read -r line
 do
 	if [ "$line" == "compass.activated" ];
@@ -31,6 +35,26 @@ do
 		navigationStatus=1
 	fi
 done < "$compassfile"
+
+# Checks to see if break_orbit and default have the same text
+while IFS= read -r line
+do
+	while IFS = read -r line2
+	do
+		if [ "$line2" == "$line" ];
+		then
+			echo "Remove this statement"
+		else
+			copied_file_status=0
+		fi
+	done < "$break_orbit_file"
+done < "$compassfile"
+
+# Checks to see if each challenge has been completed
+if [[ "$compass_line_status" == 1 ]] && [[ "$compass_line_status" == 1 ]];
+then
+	navigationStatus=1
+fi
 
 # Activates navigation & nav thrusters if navigation challenges have been completed
 if [ "$navigationStatus" == 1 ];
