@@ -7,13 +7,13 @@ WARNING: Solar Flare
 
 Checking systems...
 Navigation System OFFLINE...
-Reactor Systems OFFLINE...
+Reactor Systems ONLINE...
 Engine Systems OFFLINE...
 Backup Terminal System... ONLINE
 
 Current trajectory: CRASH LANDING TO 'EARTH' IMMINENT
 
-Please reboot systems.
+URGENT: run engine control system and run the command engines.engage to fire the ship's engines and break orbit.
 
 Use these commands to navigate and interact with the ship's computer:
   pwd - Display your current location
@@ -22,5 +22,4 @@ Use these commands to navigate and interact with the ship's computer:
     cd .. - Move "backwards"
   cat <file> - Display contents of a file
   man <command> - Display manual for a command
-  ./syscheck.sh - Run a check on the ship's systems
-  ./engine_control - Run the engine control system -- REQUIRES NAVIGATION SYSTEM & REACTOR SYSTEMS TO BE ONLINE
+  ./engine_controllers.sh - Run the engine control system -- REQUIRES NAVIGATION SYSTEM & REACTOR SYSTEMS TO BE ONLINE
