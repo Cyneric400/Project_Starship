@@ -1,1 +1,6 @@
 Go to power_alloc.config.txt and set engine-controllers to 25. Make sure you draw that 20% of power from some other system, but be careful which one you choose! And make sure it's 25 exactly. 
+
+Use the nano command-line editor to edit the file.
+
+  nano <file> - opens the file in the nano editor
+    HINT: to save your file and exit nano, type CTRL-X, then y, then enter.
