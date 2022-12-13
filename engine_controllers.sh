@@ -204,6 +204,7 @@ success(){
 	echo "Congratulations, Captain! You saved your ship from destruction. And what's more important, you (hopefully) improved your skills with the Linux command line." >> success.txt
 	echo "If you're interested in improving your skills further (and preventing further disasters), check out the websites below." >> success.txt
 	echo "Who knows--Cygnus IV may need you again someday." >> success.txt
+	echo "tutorial1" >> success.txt
 	sleep 3
 	echo "You did it! Check the success.txt file for your reward."
 }
