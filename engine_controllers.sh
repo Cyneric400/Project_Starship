@@ -42,7 +42,7 @@ then
 	done < "$compassfile"
 else
 	copmass_line_status=0
-	echo -e "\n"
+	# echo -e "\n"
 	echo "WARNING: Unable to access pulsar_compass file."
 	sleep 0.5
 fi
@@ -65,13 +65,15 @@ do
 		done < "$break_orbit_file"
 	else
 		copied_file_status=0
+		echo "WARNING: error with break_orbit: could not set path to break_orbit. File may be corrupt or missing."
+		sleep 0.5
 	fi
 done < "$defaultfile"
 
 if [ -d $useless_directory_0 ];
 then
 	useless_file_0_status=0
-	echo -e "\n"
+	#echo -e "\n"
 	echo "WARNING: unrecognized navigation file"
 	sleep 0.75
 	echo -e "\n"
@@ -82,6 +84,9 @@ fi
 if [ -f $orbit_file ];
 then
 	orbit_file_status=1
+else
+	echo "WARNING: error with orbit: could not find orbit flight path. File may be corrupt or missing."
+	sleep 0.5
 fi
 
 # echo "$compass_line_status, $copied_file_status, $useless_file_0_status, $orbit_file_status"
