@@ -76,7 +76,7 @@ then
 	#echo -e "\n"
 	echo "WARNING: unrecognized navigation file"
 	sleep 0.75
-	echo -e "\n"
+	# echo -e "\n"
 else
 	useless_file_0_status=1
 fi
@@ -114,6 +114,7 @@ do
 	fi
 done < "$reactorfile"
 
+echo -e "\n"
 echo "Running systems check..."
 sleep 1
 echo "Navigation System $navStatus ..."
