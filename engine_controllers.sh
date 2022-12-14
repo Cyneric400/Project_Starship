@@ -211,7 +211,7 @@ success(){
 	echo "Who knows--Cygnus IV may need you again someday." >> success.txt
 	echo "----" >> success.txt
 	echo "https://www.hostinger.com/tutorials/linux-commands" >> success.txt
-	echo "https://www.wpoven.com/blog/linux-commands"
+	echo "https://www.wpoven.com/blog/linux-commands" >> success.txt
 	echo "https://digitalocean.com/community/tutorials/linux-commands" >> success.txt
 	echo "https://www.codeacademy.com/article/command-line-commands" >> success.txt
 	sleep 3
