@@ -23,3 +23,4 @@ Use these commands to navigate and interact with the ship's computer:
   cat <file> - Display contents of a file
   man <command> - Display manual for a command
   ./engine_controllers.sh - Run the engine control system -- REQUIRES NAVIGATION SYSTEM & REACTOR SYSTEMS TO BE ONLINE
+    CTRL-C - exists the engine control system
