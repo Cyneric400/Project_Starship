@@ -1,1 +1,1 @@
-Navigate to the Project_Starship directory through a command line and cat intro.txt, then follow the instructions from there.
+Navigate to the Project_Starship directory through a command line. Run the command cat intro.txt, then follow the instructions from there.
